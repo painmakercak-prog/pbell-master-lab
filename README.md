@@ -8,6 +8,8 @@ This is a static app. It builds locked raw Atlanta trap instrumental prompts. Fa
 
 Open the GitHub Pages URL for this repository, or add it to your iPhone Home Screen from Safari (Share, then Add to Home Screen).
 
+https://painmakercak-prog.github.io/pbell-master-lab/
+
 ## Rules
 
 The master formula stays locked. Only the sample trigger, BPM, and the optional uploaded-audio sentence change. Reset restores RuneScape-style MIDI, 150 BPM, and the uploaded audio sentence.
