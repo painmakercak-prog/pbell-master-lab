@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PBell Lab">
+  <meta name="description" content="Cowboy Beatz PBell Master Lab. Locked raw Atlanta trap instrumental prompts for the PBell Suno model.">
+  <title>PBell Master Lab</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="icon" type="image/png" href="icons/icon-192.png" sizes="192x192">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <img class="brand-mark" src="icons/icon-192.png" width="36" height="36" alt="Cowboy Beatz">
+      <div class="brand">
+        <h1>PBell Master Lab</h1>
+        <p>Cowboy Beatz  ·  V2.0</p>
+      </div>
+    </header>
+
+    <div class="modes" role="tablist" aria-label="Mode">
+      <button type="button" id="mode-quick" aria-pressed="true">Quick Cook</button>
+      <button type="button" id="mode-lab" aria-pressed="false">Full Lab</button>
+    </div>
+
+    <div id="main"></div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="copy-fallback" class="fallback" role="dialog" aria-label="Copy text">
+    <div class="sheet">
+      <p class="hint">Clipboard was blocked. Select the text and copy it.</p>
+      <textarea id="copy-fallback-text" readonly></textarea>
+      <div class="row" style="margin-top:8px">
+        <button type="button" class="btn primary" id="copy-fallback-select">Select all</button>
+        <button type="button" class="btn" id="copy-fallback-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="storage.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>
