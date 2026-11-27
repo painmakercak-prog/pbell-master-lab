@@ -1,0 +1,42 @@
+name: Decode icons
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.b64"
+      - ".github/workflows/decode-icons.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode base64 icons into PNG files
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          for p in Path(".").rglob("*.b64"):
+              out = Path(str(p)[:-4])
+              out.parent.mkdir(parents=True, exist_ok=True)
+              data = base64.b64decode("".join(p.read_text().split()))
+              if out.exists() and out.read_bytes() == data:
+                  print("unchanged", out)
+                  continue
+              out.write_bytes(data)
+              print("wrote", out, len(data))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apple-touch-icon.png icons/icon-192.png icons/icon-512.png icons/apple-touch-icon.png
+          if git diff --cached --quiet; then
+            echo "No icon changes"
+            exit 0
+          fi
+          git commit -m "Add decoded PWA icons"
+          git push
